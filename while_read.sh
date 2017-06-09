@@ -17,7 +17,7 @@
 #---------------------------------------------------------------------------------
 # tips:
 # if connection fails, just run download.sh again. 
-# may mv those all-ready-done my_wget.sh to other directory.
+# may mv those already-done my_wget.sh to other directory.
 #---------------------------------------------------------------------------------
 
 #  some oceanic variables
