@@ -14,4 +14,5 @@ Lawrence Livermore National Laboratory（LLNL）提供了CMIP5模式数据的下
 #---------------------------------------------------------------------------------
 # variable list, modify according to your need
 for var in so thetao vo;do
+
 #---------------------------------------------------------------------------------
