@@ -35,7 +35,7 @@ for sh in `ls wget-*.sh`; do
     continue
   fi
 
-  grep "${var}_" temp_${sh} > temp_${var}.sh
+  grep "\'${var}_" temp_${sh} > temp_${var}.sh
   sort -u temp_${var}.sh -o temp_${var}.sh
   sed -i '/\.nc/d' temp_${sh}
   num1=$( sed -n '/download_files=/=' temp_${sh} |head -n 1 )
