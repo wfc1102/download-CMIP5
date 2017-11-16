@@ -1,4 +1,9 @@
 # download-CMIP5
+
+How to automatically (using wget -O) retrive the wget-yyyymmdd666666.sh is recommanded to refer to
+
+https://github.com/diegojco/CMIP5_ESGF_downloads
+
 #---------------------------------------------------------------------------------
 
 while_read.sh
