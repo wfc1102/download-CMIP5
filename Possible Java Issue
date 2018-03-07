@@ -1,0 +1,63 @@
+--------------------------------------------------------------------------------
+Retrieving Credentials...Exception in thread "main" java.lang.UnsupportedClassVersionError: esg/security/myproxy/MyProxyConsole : Unsupported major.minor version 52.0
+	at java.lang.ClassLoader.defineClass1(Native Method)
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:803)
+	at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142)
+	at java.net.URLClassLoader.defineClass(URLClassLoader.java:442)
+	at java.net.URLClassLoader.access$100(URLClassLoader.java:64)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:354)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:348)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:347)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:425)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:312)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:358)
+	at sun.launcher.LauncherHelper.checkAndLoadMain(LauncherHelper.java:482)
+Certificate could not be retrieved
+--------------------------------------------------------------------------------
+Theese prompts indicate that wget script try to use higher Java version than installed in machine/server. If you are not the administrator, updating Java is challenging.
+
+https://esgf.github.io/esgf-swt/wget/ also provides similar solutions:
+
+Solution 1: Run the wget script with the -H option.
+ bash wget-################.sh -H
+Authentication will be tried without certificates then.
+
+Solution 2: Install Oracle Java 1.7 or newer and add it to your environment (define JAVA_HOME etc.). The wget script can usually be used without options then.
+--------------------------------------------------------------------------------
+However, Solution 1 make it a interactive one, this is not cool. 
+Then, what else we can do? First, let's see other args can be used.
+--------------------------------------------------------------------------------
+
+# ./my_msftmyz_wget-20180308060229.sh -h
+Usage: my_msftmyz_wget-20180308060229.sh [flags] [openid] [username]
+Flags is one of:
+        H        : Authenticate with OpenID (username,) and password, without the need for a certificate.
+        T        : Forces wget to use TLSv1. 
+        c <cert> : use this certificate for authentication.
+        f        : force certificate retrieval (defaults to only once per day); for certificate-less authentication (see -H option), this flag will force login and refresh cookies.
+        F <file> : read input from file instead of the embedded one (use - to read from stdin)
+        o <openid>: Provide OpenID instead of interactively asking for it.
+        I <user_id> : Explicitly set user ID.  By default, the user ID is extracted from the last component of the OpenID URL.  Use this flag to override this behaviour.                   
+        w <file> : Write embedded files into a file and exit
+        i        : set insecure mode, i.e. don't check server certificate
+        s        : completely skip security. It will only work if the accessed data is not secured at all. -- works only if the accessed data is unsecured or a certificate exists or cookies are saved (latter applies to -H option only).
+        u        : Issue the search again and see if something has changed.
+        U        : Update files from server overwriting local ones (detect with -u)
+        n        : Don't download any files, just report.
+        p        : preserve data that failed checksum
+        d        : display debug information
+        v        : be more verbose
+        q        : be less verbose
+        h        : displays this help
+
+This command stores the states of the downloads in ../my_msftmyz_wget-20180308060229.sh.status
+For more information check the website: http://esgf.org/wiki/ESGF_wget
+--------------------------------------------------------------------------------
+ -o saves the ID, what about the passwd?
+ echo $PASSWD | ./my_msftmyz_wget-20180308060229.sh -H -o https://esgf-data.dkrz.de/esgf-idp/openid/YOUR_ID
+ add this command to nclist.sh if such Java issues occur.
+ --------------------------------------------------------------------------------
+ Note: 
+ ./my_msftmyz_wget-20180308060229.sh -s sometimes works, sometime doesn't.
+ --------------------------------------------------------------------------------
